@@ -1,0 +1,18 @@
+{
+  "login": {
+    "username": "somab63683@lewenbo.com",
+    "password": "GoodLuck777",
+    "base_url": "https://secure.simplepractice.com"
+  },
+  "task": {
+    "title": "Tester1",
+    "description": "Task created using Playwright with Python",
+    "date_day": 22,
+    "time_hour": "5",
+    "time_minute": "30",
+    "time_ampm": "PM",
+    "priority": "critical",
+    "client_name": "Whitney Weissnat",
+    "team_member": "Test automation (you)"
+  }
+}
