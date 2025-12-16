@@ -62,26 +62,30 @@ Pytest 9.0.2 - Testing framework
 
 **Set-up instructions**
 1. Clone repository
-   in terminal:
+   ```bash
    git clone <repository-url>
    cd AQA_SimplePractice_task
+   ```
 
-2. Install dependencies
-   in terminal:
+3. Install dependencies
+   ```bash
    pip install -r requirements.txt
+   ```
    
-4. (If needed) verify Playwright browser installation
-   in terminal:
+5. (If needed) verify Playwright browser installation
+   ```bash
    playwright install
-
+   ```
+   
 **Configuration (security detail)**
+
 As it was mentioned before, it may be the case that data.json file may be updated with
 proper or current SimplePractice credentials
 
 **To run the tests:**
-in terminal:
+```bash
 pytest -v -s QA_TaskFlow_SP.py
-
+```
 **Result:**
 Statements are print in terminal after the workflow is created and run specifying if the test Passed or Failed
 
