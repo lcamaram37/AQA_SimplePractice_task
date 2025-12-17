@@ -48,6 +48,7 @@ def test_login_and_task_flow(page:Page, task_data):
     print("✅ Task created successfully.")
 
     #Verification point of new task created and visible
+    task_page.search_bar.fill(task_data["title"])
     expect(page.get_by_text(task_data["title"]).first).to_be_visible()
     page.screenshot(path="SS_TaskVisible.jpg")
     print("✅ Task is visible in Incomplete list")
@@ -57,12 +58,10 @@ def test_login_and_task_flow(page:Page, task_data):
     print("✅ Task completed successfully.")
 
     #Verification point of task marked as completed
-    task_page.filter_completed_tasks()
+    task_page.filter_completed_tasks(task_data["title"])
     expect(page).to_have_url("https://secure.simplepractice.com/tasks?completed=true")
-    task_title=task_data["title"]
-    task_title_locator=page.get_by_text(task_title)
-    task_title_locator.scroll_into_view_if_needed()
-    expect(task_title_locator).to_be_visible(timeout=10000)
+    task_title_locator=page.get_by_text(task_data["title"], exact=True)
+    expect(task_title_locator).to_be_visible()
     page.screenshot(path="SS_TaskCompleted.jpg")
     print("✅ Task completed and visible in Complete list.")
 

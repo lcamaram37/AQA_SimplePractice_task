@@ -25,6 +25,7 @@ class TasksPage:
         self.done_btn=self.page.get_by_role("button",name="Done", exact=True)
 
         #Web elements related to tasks verification
+        self.search_bar=self.page.get_by_role("textbox", name="Search", exact=True)
         self.task_check=self.page.locator("div.checkable-circle")
         self.edit_task_btn=self.page.get_by_label("Edit task")
 
@@ -84,15 +85,22 @@ class TasksPage:
     def attaching_file(self,file_path:str):
         self.attach_btn.set_input_files(file_path)
 
+    #Searching for the task
+    def search_task(self, title:str):
+        self.search_bar.click()
+        self.search_bar.fill(title)
+
     #Marking task created as Completed
     def mark_task_as_complete(self,task:str):
         task_complete=self.task_check.first
         task_complete.click()
 
     #Looking for all tasks Completed
-    def filter_completed_tasks(self):
+    def filter_completed_tasks(self, title:str):
         self.incomplete_btn.click()
         self.complete_btn.click()
+        self.search_bar.click()
+        self.search_bar.fill(title)
 
     #Reference for task completed
     def verify_task_complete_details(self, task:str):
