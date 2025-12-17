@@ -49,6 +49,7 @@ Demonstrate test structure, POM implementation and test data management
 * README.md : This file
 * models > login_SP.py : SimplePractice login interpretation
 *        > tasks_SP.py : SimplePractice tasks workflow
+* SS_xxxx.jpg : screenshots as reference files of different methods during test workflow, these will be updated every time test is run to verify behavior
 
 **Technology implemented**
 Python 3.13.2 - Programming language
@@ -91,4 +92,7 @@ Statements are print in terminal after the workflow is created and run specifyin
 
 **Created:**
 Dec 16th 2025, 17:20pm
+
+**Final update:**
+Dec 17th 2025, 10:30am
 
