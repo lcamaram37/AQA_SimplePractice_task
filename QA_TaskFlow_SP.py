@@ -15,14 +15,20 @@ def test_login_and_task_flow(page:Page, task_data):
     login_page.login(login_data["username"],login_data["password"])
 
     #Verification of successful login
+    page.wait_for_url(f"{login_data['base_url']}/calendar/appointments")
     expect(page).to_have_url(f"{login_data['base_url']}/calendar/appointments")
+    page.screenshot(path="SS_LoginOK.jpg")
     print("✅ 1. Successful login.")
 
     #Creating a new task
     task_page.navigate_to_tasks_page()
     expect(page).to_have_url("https://secure.simplepractice.com/tasks")
+    page.wait_for_url("https://secure.simplepractice.com/tasks",timeout=10)
+    page.screenshot(path="SS_TasksOK.jpg")
     task_page.open_new_task_form()
     expect(page).to_have_url("https://secure.simplepractice.com/tasks/new")
+    page.wait_for_url("https://secure.simplepractice.com/tasks/new",timeout=50)
+
     task_page.create_task(
         title=task_data["title"],
         description=task_data["description"],
@@ -34,7 +40,7 @@ def test_login_and_task_flow(page:Page, task_data):
         client=task_data["client_name"],
         team_member=task_data["team_member"]
     )
-
+    page.screenshot(path="SS_NewTaskOK.jpg")
     task_page.attaching_file("CV.pdf")
     print("✅ File attached.")
 
@@ -43,6 +49,7 @@ def test_login_and_task_flow(page:Page, task_data):
 
     #Verification point of new task created and visible
     expect(page.get_by_text(task_data["title"]).first).to_be_visible()
+    page.screenshot(path="SS_TaskVisible.jpg")
     print("✅ Task is visible in Incomplete list")
 
     #Complete task
@@ -52,7 +59,11 @@ def test_login_and_task_flow(page:Page, task_data):
     #Verification point of task marked as completed
     task_page.filter_completed_tasks()
     expect(page).to_have_url("https://secure.simplepractice.com/tasks?completed=true")
-    expect(page.get_by_text(task_data["title"]).first).to_be_visible()
+    task_title=task_data["title"]
+    task_title_locator=page.get_by_text(task_title)
+    task_title_locator.scroll_into_view_if_needed()
+    expect(task_title_locator).to_be_visible(timeout=10000)
+    page.screenshot(path="SS_TaskCompleted.jpg")
     print("✅ Task completed and visible in Complete list.")
 
     #Verification of task legend
